@@ -2,4 +2,14 @@
 
 <div class="alert alert-warning" role="alert">This is a sample page. Replace link in the header with your own.</div>
 
-<%= image_tag('log_game.png') %>
+<%= form_for @game, url: log_path do |f| %>
+  <div class="field">
+    <%= f.date_select :played_at %>
+    <%= f.hidden_field :player1_id, value: @current_user %>
+    <%= f.collection_select(:player2_id, User.where.not(id: @current_user), :id, :email) %>
+    <%= f.number_field :player1_score %>
+    <%= f.number_field :player2_score %>
+    <%= f.submit %>
+
+  </div>
+<% end %>

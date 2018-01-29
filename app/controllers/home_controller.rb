@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, :except => [:index]
+
   def index
   end
 
@@ -6,5 +8,6 @@ class HomeController < ApplicationController
   end
 
   def log
+    @game = Game.new
   end
 end
